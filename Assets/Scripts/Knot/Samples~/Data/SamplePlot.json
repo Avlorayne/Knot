@@ -1,0 +1,46 @@
+{
+  "frames": [
+    {
+      "frameIndex": 0,
+      "instructions": [
+        {
+          "name": "SampleParam",
+          "description": "示例指令 - 第一帧",
+          "isCanCoexist": true,
+          "isRelease": true,
+          "isCanBeSkipped": true,
+          "isBeWaited": false,
+          "message": "欢迎使用 Knot 剧情系统！"
+        }
+      ]
+    },
+    {
+      "frameIndex": 1,
+      "instructions": [
+        {
+          "name": "SampleParam",
+          "description": "示例指令 - 第二帧",
+          "isCanCoexist": true,
+          "isRelease": true,
+          "isCanBeSkipped": true,
+          "isBeWaited": false,
+          "message": "这是一个示例剧情脚本。"
+        }
+      ]
+    },
+    {
+      "frameIndex": 2,
+      "instructions": [
+        {
+          "name": "SampleParam",
+          "description": "示例指令 - 第三帧",
+          "isCanCoexist": true,
+          "isRelease": true,
+          "isCanBeSkipped": true,
+          "isBeWaited": false,
+          "message": "感谢使用！"
+        }
+      ]
+    }
+  ]
+}
