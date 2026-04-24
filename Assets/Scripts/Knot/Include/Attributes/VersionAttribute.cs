@@ -1,6 +1,6 @@
 using System;
 
-namespace Knot.Runtime.Attributes
+namespace Knot.Include.Attributes
 {
     /// <summary>
     /// 用于标记代码版本的特性

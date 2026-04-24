@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Knot.Runtime.Attributes;
+using Knot.Include.Attributes;
+using Knot.Include.Utility;
 using Knot.Runtime.Core;
-using Knot.Runtime.Utility;
 using UnityEngine;
 
-namespace Knot.Runtime.Data
+namespace Knot.Runtime.DataSeq
 {
     /// <summary>
     /// 演出帧数据

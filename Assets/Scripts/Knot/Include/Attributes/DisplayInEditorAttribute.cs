@@ -1,6 +1,6 @@
 using System;
 
-namespace Knot.Runtime.Attributes
+namespace Knot.Include.Attributes
 {
     /// <summary>
     /// 标记字段或属性需要在编辑器中显示

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization;
-using Knot.Runtime.Attributes;
+using Knot.Include.Attributes;
 
-namespace Knot.Runtime.Utility
+namespace Knot.Include.Utility
 {
     /// <summary>
     /// 反射辅助工具类，用于获取类型成员信息

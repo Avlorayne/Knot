@@ -1,7 +1,7 @@
 using System;
-using Knot.Runtime.Attributes;
+using Knot.Include.Attributes;
 
-namespace Knot.Runtime.Utility
+namespace Knot.Include.Utility
 {
     /// <summary>
     /// 字符串扩展方法

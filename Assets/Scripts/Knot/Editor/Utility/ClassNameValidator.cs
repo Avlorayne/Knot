@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Knot.Runtime.Attributes;
+using Knot.Include.Attributes;
 
 namespace Knot.Editor.Utility
 {

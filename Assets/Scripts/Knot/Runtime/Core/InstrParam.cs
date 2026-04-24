@@ -4,8 +4,8 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
-using Knot.Runtime.Attributes;
-using Knot.Runtime.Utility;
+using Knot.Include.Attributes;
+using Knot.Include.Utility;
 using UnityEngine;
 
 namespace Knot.Runtime.Core
@@ -87,7 +87,7 @@ namespace Knot.Runtime.Core
         /// 扩展数据
         /// </summary>
         [JsonInclude] [JsonExtensionData] [CanBeNull]
-        protected Dictionary<string, JsonElement> ExtensionData { get; set; } = new();
+        protected Dictionary<string, JsonElement?> ExtensionData { get; set; } = new();
 
         /// <summary>
         /// 打印指令参数信息

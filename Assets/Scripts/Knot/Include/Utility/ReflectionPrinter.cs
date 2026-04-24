@@ -4,9 +4,9 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
-using Knot.Runtime.Attributes;
+using Knot.Include.Attributes;
 
-namespace Knot.Runtime.Utility
+namespace Knot.Include.Utility
 {
     /// <summary>
     /// 对象打印接口

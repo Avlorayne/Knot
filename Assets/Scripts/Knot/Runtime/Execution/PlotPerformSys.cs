@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Knot.Instruction;
 using Knot.Runtime.Core;
-using Knot.Runtime.Data;
+using Knot.Runtime.DataSeq;
 using Knot.scr.Allocate;
 using UnityEditor;
 using UnityEngine;
