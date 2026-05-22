@@ -1,5 +1,5 @@
 using System;
-using System.Text.Json;
+using Newtonsoft.Json;
 using Knot.Runtime.Attributes;
 
 namespace Knot.Runtime.Utility
@@ -34,7 +34,7 @@ namespace Knot.Runtime.Utility
 
             Type type = obj.GetType();
 
-            return JsonSerializer.Serialize(obj, type, new JsonSerializerOptions{IncludeFields = true, WriteIndented = true});
+            return JsonConvert.SerializeObject(obj, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Include, Formatting = Formatting.Indented });
         }
     }
 }

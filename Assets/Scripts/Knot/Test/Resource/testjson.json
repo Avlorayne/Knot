@@ -1,0 +1,23 @@
+﻿{
+  "_frames": [
+    {
+      "_instructions": [
+        {
+          "$type": "Knot.Test.UnityEventTest.UnityEventTestParam, Assembly-CSharp",
+          "OnTestComplete": {
+            "m_PersistentCalls": {
+              "m_Calls": []
+            }
+          },
+          "TestMessage": "UnityEvent 序列化测试消息",
+          "Name": "UnityEventTestParam",
+          "Description": "UnityEvent 序列化测试指令",
+          "IsCanCoexist": false,
+          "IsRelease": true,
+          "IsCanBeSkipped": true,
+          "IsBeWaited": false
+        }
+      ]
+    }
+  ]
+}

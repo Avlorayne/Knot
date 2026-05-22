@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using Knot.Runtime.Attributes;
 using Knot.Runtime.Core;
 using Knot.Runtime.Utility;
@@ -19,7 +18,12 @@ namespace Knot.Runtime.Data
     [Serializable]
     public class Frame
     {
-        [JsonInclude] private List<InstrParam> _instructions = new List<InstrParam>();
+        //空构造用于反序列化
+        public Frame()
+        {
+
+        }
+        [JsonProperty] private List<InstrParam> _instructions = new List<InstrParam>();
 
         #region Properties and Methods
         /// <summary>
@@ -88,19 +92,19 @@ namespace Knot.Runtime.Data
         /// <version>1.0.0</version>
         public string Serialize()
         {
-            string json = JsonSerializer.Serialize(this);
-            string replaced = JsonSerializer.Serialize(_instructions);
+            string json = JsonConvert.SerializeObject(this);
+            string replaced = JsonConvert.SerializeObject(_instructions);
 
             string replacing;
 
             if (_instructions == null || _instructions.Count == 0)
             {
-                replacing =  "[]";
+                replacing = "[]";
             }
             else
             {
                 var instructionJsonStrings = _instructions.Select(instr => InstrParam.Serialize(instr));
-                replacing =  "[" + string.Join(",", instructionJsonStrings) + "]";
+                replacing = "[" + string.Join(",", instructionJsonStrings) + "]";
             }
             Debug.Log(
                 @$"[Frame.Serialize]
@@ -130,7 +134,7 @@ replacing: {JsonPrettyPrinter.Format(replacing)}");
 
             try
             {
-                var instructions = System.Text.Json.JsonSerializer.Deserialize<List<InstrParam>>(cleanJson);
+                var instructions = JsonConvert.DeserializeObject<List<InstrParam>>(cleanJson);
                 if (instructions != null)
                 {
                     foreach (var instr in instructions)
@@ -140,7 +144,7 @@ replacing: {JsonPrettyPrinter.Format(replacing)}");
                     }
                 }
             }
-            catch (System.Text.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 Debug.LogError($"[Frame.Deserialize]Frame deserialization error: {ex.Message}");
             }

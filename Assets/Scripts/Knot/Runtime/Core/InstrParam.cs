@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using JetBrains.Annotations;
 using Knot.Runtime.Attributes;
 using Knot.Runtime.Utility;
@@ -17,9 +16,13 @@ namespace Knot.Runtime.Core
     [Serializable]
     public class InstrParam
     {
+        public InstrParam()//空构造函数用于反序列化
+        {
+
+        }
         private static ISerializer _serializer = new ReflectionSerializer();
         private static IPrinter _printer = new ReflectionPrinter();
-        
+
         /// <summary>
         /// 指令命名空间前缀
         /// </summary>
@@ -28,17 +31,18 @@ namespace Knot.Runtime.Core
         /// <summary>
         /// 指令名称
         /// </summary>
-        [JsonInclude] public virtual string Name { get; protected set; } = nameof(InstrParam);
-        
+        [JsonProperty] public virtual string Name { get; protected set; } = nameof(InstrParam);
+
         /// <summary>
         /// 执行器类型名称
         /// </summary>
-        [JsonInclude] protected virtual string _ExecutorType { get; set; } = nameof(InstrExecute);
+        [JsonProperty] protected virtual string _ExecutorType { get; set; } = nameof(InstrExecute);
 
         /// <summary>
         /// 获取执行器类型
         /// </summary>
-        [JsonIgnore] public Type ExecutorType
+        [JsonIgnore]
+        public Type ExecutorType
         {
             get
             {
@@ -61,33 +65,35 @@ namespace Knot.Runtime.Core
         /// <summary>
         /// 指令描述
         /// </summary>
-        [JsonInclude] public virtual string Description { get; protected set; } = "Basic Description";
+        [JsonProperty] public virtual string Description { get; protected set; } = "Basic Description";
 
         /// <summary>
         /// 是否允许共存（同一帧中是否允许存在多个相同类型的指令）
         /// </summary>
-        [JsonInclude] public virtual bool IsCanCoexist { get; set; } = false;
+        [JsonProperty] public virtual bool IsCanCoexist { get; set; } = false;
 
         /// <summary>
         /// 是否执行后释放
         /// </summary>
-        [JsonInclude] public virtual bool IsRelease { get; set; } = false;
+        [JsonProperty] public virtual bool IsRelease { get; set; } = false;
 
         /// <summary>
         /// 是否可以跳过
         /// </summary>
-        [JsonInclude] public virtual bool IsCanBeSkipped { get; set; } = false;
+        [JsonProperty] public virtual bool IsCanBeSkipped { get; set; } = false;
 
         /// <summary>
         /// 是否需要等待执行完成
         /// </summary>
-        [JsonInclude]  public virtual bool IsBeWaited { get; set; } = false;
+        [JsonProperty] public virtual bool IsBeWaited { get; set; } = false;
 
         /// <summary>
         /// 扩展数据
         /// </summary>
-        [JsonInclude] [JsonExtensionData] [CanBeNull]
-        protected Dictionary<string, JsonElement> ExtensionData { get; set; } = new();
+        [JsonProperty]
+        [JsonExtensionData]
+        [CanBeNull]
+        protected Dictionary<string, object> ExtensionData { get; set; } = new();
 
         /// <summary>
         /// 打印指令参数信息
@@ -117,7 +123,7 @@ namespace Knot.Runtime.Core
         /// <returns>指令参数对象</returns>
         public static T Deserialize<T>(string jsonString) where T : InstrParam
         {
-            T instrParam = JsonSerializer.Deserialize<T>(jsonString);
+            T instrParam = JsonConvert.DeserializeObject<T>(jsonString);
             return instrParam;
         }
 
@@ -130,7 +136,7 @@ namespace Knot.Runtime.Core
         {
             Debug.Log($"[InstrParam.Convert]Json String\n{_printer.PrintString(instrParam)}");
 
-            string jsonString = JsonSerializer.Serialize(instrParam);
+            string jsonString = JsonConvert.SerializeObject(instrParam);
             string typeName = instrParam.Name;
 
             if (!typeName.Contains(Namespace))
@@ -147,14 +153,7 @@ namespace Knot.Runtime.Core
 
             Debug.Log($"[InstrParam.Convert]Find Type :{type.Name}");
 
-            return JsonSerializer.Deserialize(jsonString,
-                type,
-                new JsonSerializerOptions
-                {
-                    IncludeFields = true
-                }
-                )
-                as InstrParam;
+            return JsonConvert.DeserializeObject(jsonString, type) as InstrParam;
         }
     }
 }

@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using Knot.Runtime.Attributes;
 using Knot.Runtime.Core;
 using Knot.Runtime.Utility;
@@ -17,12 +16,19 @@ namespace Knot.Runtime.Data
     [Version("1.0.0")]
     public class FrameList
     {
+        // 空构造函数用于反序列化
+        public FrameList()
+        {
+
+        }
+
+
         #region Const Char
         private const string DEVIDE_CHAR = "---------------------------------------------------------------------------";
         private const int MAX_PRINT = 65;
         #endregion
 
-        [JsonInclude] private List<Frame> _frames = new();
+        [JsonProperty] private List<Frame> _frames = new();
 
         #region PropertyOverrider
         /// <summary>
@@ -71,7 +77,8 @@ namespace Knot.Runtime.Data
         /// <version>1.0.0</version>
         [JsonIgnore] public int Count => _frames.Count;
 
-        private HashSet<Frame> _hashSet = new();
+        //存在与Content的变换同步问题，以及未见作用，当前序列化改为忽略，在反序列化时更新调用，后续建议删除，
+        [JsonIgnore] private HashSet<Frame> _hashSet = new();
 
         /// <summary>
         /// 是否包含指定帧
@@ -94,15 +101,16 @@ namespace Knot.Runtime.Data
         /// 序列化帧列表
         /// </summary>
         /// <version>1.0.0</version>
+        /*
         public string Serialize()
         {
-            string json = JsonSerializer.Serialize(this);
-            string replaced = JsonSerializer.Serialize(_frames);
+            string json = JsonConvert.SerializeObject(this);
+            string replaced = JsonConvert.SerializeObject(_frames);
 
             string replacing;
             if (_frames == null || _frames.Count == 0)
             {
-                replacing =  "[]";
+                replacing = "[]";
             }
             else
             {
@@ -121,7 +129,15 @@ replacing: {JsonPrettyPrinter.Format(replacing)}");
 
             return JsonPrettyPrinter.Format(result);
         }
-
+        */
+        /// <summary>
+        /// 序列化帧列表
+        /// </summary>
+        /// <version>2.0.0</version>
+        public string Serialize()
+        {
+            return null;
+        }
         /// <summary>
         /// 反序列化帧列表
         /// </summary>
@@ -154,7 +170,7 @@ replacing: {JsonPrettyPrinter.Format(replacing)}");
                 Debug.Log($"Start to Deserialize: {DEVIDE_CHAR}");
 
                 // 反序列化为 InstrParam 数组的列表
-                rawFrameList = JsonSerializer.Deserialize<FrameList>(cleanJson);
+                rawFrameList = JsonConvert.DeserializeObject<FrameList>(cleanJson);
 
                 if (rawFrameList == null)
                 {

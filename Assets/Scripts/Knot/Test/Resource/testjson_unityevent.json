@@ -1,0 +1,43 @@
+﻿{
+  "_frames": [
+    {
+      "_instructions": [
+        {
+          "$type": "Knot.Test.UnityEventTest.UnityEventTestParam, Assembly-CSharp",
+          "OnTestComplete": {
+            "m_PersistentCalls": {
+              "m_Calls": [
+                {
+                  "m_Target": {
+                    "instanceID": 26592
+                  },
+                  "m_TargetAssemblyTypeName": "Knot.Test.JsonTest.JsonTest, Assembly-CSharp",
+                  "m_MethodName": "OnUnityEventPersistentCallback",
+                  "m_Mode": 0,
+                  "m_Arguments": {
+                    "m_ObjectArgument": {
+                      "instanceID": 0
+                    },
+                    "m_ObjectArgumentAssemblyTypeName": "",
+                    "m_IntArgument": 0,
+                    "m_FloatArgument": 0.0,
+                    "m_StringArgument": "",
+                    "m_BoolArgument": false
+                  },
+                  "m_CallState": 2
+                }
+              ]
+            }
+          },
+          "TestMessage": "UnityEvent 序列化测试消息",
+          "Name": "UnityEventTestParam",
+          "Description": "UnityEvent 序列化测试指令",
+          "IsCanCoexist": false,
+          "IsRelease": true,
+          "IsCanBeSkipped": true,
+          "IsBeWaited": false
+        }
+      ]
+    }
+  ]
+}
